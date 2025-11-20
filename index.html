@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aqua Vend Kenya | Smart Automated Vending Machines</title>
+  <title>Aqua Vend Kenya | Smart Water Vending Machines</title>
 
   <style>
     /* Global Style */
@@ -43,6 +43,7 @@
       transform: scale(1.05);
     }
 
+    /* Header */
     header {
       background: #0096c7;
       color: white;
@@ -55,6 +56,7 @@
       background: #003f63;
     }
 
+    /* Sections */
     section {
       padding: 2rem 1.5rem;
       max-width: 900px;
@@ -71,40 +73,97 @@
       box-shadow: 0 4px 10px rgba(255,255,255,0.07);
     }
 
+    /* Titles */
     h2 {
       color: #0077b6;
       margin-bottom: 0.5rem;
       transition: 0.4s ease;
     }
+
     body.dark h2 { color: #63d4ff; }
 
+    /* Aqua Icons */
     ul {
       list-style-type: "💧 ";
       padding-left: 1.2rem;
     }
 
-    /* SLIDESHOW – INCREASED HEIGHT */
-    .slideshow {
+    /* ===========================
+       SLIDESHOW (Upgraded)
+       =========================== */
+    .slideshow-container {
       position: relative;
-      width: 100%;
-      height: 380px; /* increased from 260px */
+      max-width: 100%;
+      margin: auto;
       overflow: hidden;
       border-radius: 15px;
     }
 
     .slide {
+      display: none;
       width: 100%;
-      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+    }
+
+    /* Fade animation */
+    .fade {
+      animation: fadeEffect 1.2s;
+    }
+
+    @keyframes fadeEffect {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    /* Navigation Buttons */
+    .prev, .next {
+      cursor: pointer;
       position: absolute;
-      opacity: 0;
-      transition: opacity 1s ease;
-      object-fit: cover; /* keeps images clean */
+      top: 50%;
+      padding: 12px 18px;
+      color: white;
+      font-weight: bold;
+      font-size: 22px;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 8px;
+      transition: 0.3s;
+      user-select: none;
     }
 
-    .slide.active {
-      opacity: 1;
+    .next { right: 10px; }
+    .prev { left: 10px; }
+
+    .prev:hover, .next:hover {
+      background: rgba(0, 0, 0, 0.7);
     }
 
+    /* Dark mode button styles */
+    body.dark .prev,
+    body.dark .next {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+
+    body.dark .prev:hover,
+    body.dark .next:hover {
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Responsive Buttons */
+    @media (max-width: 600px) {
+      .prev, .next {
+        font-size: 18px;
+        padding: 8px 14px;
+      }
+    }
+
+    /* Contact Section */
     .contact {
       text-align: center;
       background: #0096c7;
@@ -135,6 +194,7 @@
       transform: scale(1.05);
     }
 
+    /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
@@ -142,19 +202,14 @@
       color: white;
       transition: 0.4s ease;
     }
-
-    body.dark footer {
-      background: #001f3f;
-    }
+    body.dark footer { background: #001f3f; }
   </style>
 </head>
 
 <body>
 
   <!-- DARK MODE BUTTON -->
-  <button class="toggle-btn" onclick="toggleDarkMode()">
-    🌙 Dark Mode
-  </button>
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
   <header>
     <h1>AquaVend Kenya</h1>
@@ -179,17 +234,32 @@
     </ul>
   </section>
 
+  <!-- SLIDESHOW SECTION -->
   <section>
     <h2>Our Machines</h2>
-    <p>Automatic slideshow of some of our designs:</p>
+    <p>Automatic slideshow with smooth fade and controls:</p>
 
-    <!-- SLIDESHOW -->
-    <div class="slideshow">
-      <img class="slide active" src="machine1.jpg" alt="Machine 1">
-      <img class="slide" src="machine2.jpg" alt="Machine 2">
-      <img class="slide" src="machine3.jpg" alt="Machine 3">
-      <img class="slide" src="machine4.jpg" alt="Machine 5">
-      <img class="slide" src="machine5.jpg" alt="Machine 5">
+    <div class="slideshow-container">
+
+      <div class="slide fade">
+        <img src="machine1.jpg" alt="Machine 1">
+      </div>
+
+      <div class="slide fade">
+        <img src="machine2.jpg" alt="Machine 2">
+      </div>
+
+      <div class="slide fade">
+        <img src="machine3.jpg" alt="Machine 3">
+      </div>
+
+      <div class="slide fade">
+        <img src="machine4.jpg" alt="Machine 4">
+      </div>
+
+      <!-- Navigation Buttons -->
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
 
     </div>
   </section>
@@ -205,21 +275,8 @@
     <p>© 2025 AquaVend Kenya. All Rights Reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script>
-    /* Slideshow */
-    let index = 0;
-    const slides = document.querySelectorAll(".slide");
-
-    function startSlideshow() {
-      slides.forEach(slide => slide.classList.remove("active"));
-      index = (index + 1) % slides.length;
-      slides[index].classList.add("active");
-    }
-
-    setInterval(startSlideshow, 3000);
-
-    /* Dark Mode Memory */
+    /* Dark Mode Toggle + Save State */
     function toggleDarkMode() {
       document.body.classList.toggle("dark");
       localStorage.setItem("darkMode", document.body.classList.contains("dark"));
@@ -227,6 +284,35 @@
 
     if (localStorage.getItem("darkMode") === "true") {
       document.body.classList.add("dark");
+    }
+
+    /* =====================
+       Slideshow Logic
+       ===================== */
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    /* Auto play (optional) */
+    setInterval(() => {
+      plusSlides(1);
+    }, 4000);
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slide");
+
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slides[slideIndex - 1].style.display = "block";
     }
   </script>
 
