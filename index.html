@@ -3,84 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AquaVend Kenya | Smart Water Vending Solutions</title>
+  <title>AquaVend Kenya – Smart Water Vending Machines</title>
 
   <style>
-    /* ============ RESET ============ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+    }
 
     body {
-      font-family: Arial, sans-serif;
       background: #f4f8fb;
       color: #222;
-      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* ============ HERO SECTION ============ */
-    header.hero {
-      background: linear-gradient(135deg, #00b4d8, #0077b6);
-      color: white;
-      text-align: center;
-      padding: 4rem 1rem;
+    /* ---------- DARK MODE ---------- */
+    body.dark {
+      background: #111;
+      color: #eee;
     }
-    header.hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; }
-    header.hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
 
-    /* WhatsApp CTA */
-    .cta-button {
-      background: #25d366;
-      color: white;
-      border: none;
-      padding: 0.9rem 1.8rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .cta-button:hover { transform: scale(1.05); }
-
-    /* ============ SERVICES SECTION ============ */
-    .services {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .services h2 {
-      text-align: center;
-      color: #0077b6;
-      margin-bottom: 2rem;
-    }
-    .service-cards {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .card {
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
       background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: 0.3s;
+      border-bottom: 4px solid #00a6b8;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
-    .card:hover { transform: translateY(-5px); }
-    .card h3 { color: #0077b6; margin-bottom: 0.8rem; }
 
-    /* ============ ABOUT SECTION ============ */
-    .about {
-      background: #caf0f8;
-      padding: 3rem 1rem;
+    header.dark {
+      background: #222;
+      border-bottom-color: #00ddee;
+    }
+
+    .logo {
+      height: 60px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      font-weight: bold;
+      color: #222;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #00a6b8;
+    }
+
+    body.dark nav a {
+      color: #eee;
+    }
+
+    /* WHATSAPP BUTTON */
+    .whatsapp {
+      background: #00bb2d;
+      padding: 10px 18px;
+      border-radius: 50px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* DARK MODE SWITCH */
+    .toggle-dark {
+      padding: 8px 15px;
+      background: #222;
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    body.dark .toggle-dark {
+      background: #ddd;
+      color: #000;
+    }
+
+    /* HERO SECTION */
+    #about {
+      padding: 60px;
       text-align: center;
     }
-    .about p {
-      max-width: 850px;
-      margin: auto;
-    }
 
-    /* ============ SLIDESHOW SECTION ============ */
+    /* ---------- SLIDESHOW ---------- */
     .slideshow-container {
+      max-width: 90%;
+      margin: auto;
       position: relative;
-      max-width: 900px;
-      margin: 2rem auto;
     }
 
     .slide {
@@ -90,164 +108,150 @@
     .slide img {
       width: 100%;
       height: auto;
-      border-radius: 12px;
+      border-radius: 15px;
     }
 
-    /* Fade animation */
-    .fade {
-      animation-name: fadeEffect;
-      animation-duration: 1.2s;
-    }
-
-    @keyframes fadeEffect {
-      from { opacity: 0.3; }
-      to   { opacity: 1; }
-    }
-
-    /* Next/Prev buttons */
+    /* Prev/next buttons */
     .prev, .next {
       cursor: pointer;
       position: absolute;
       top: 50%;
-      padding: 12px;
-      font-size: 22px;
+      padding: 16px;
+      font-size: 25px;
       font-weight: bold;
       color: white;
-      background: rgba(0,0,0,0.4);
-      border-radius: 50%;
+      transition: 0.3s;
       user-select: none;
-      transform: translateY(-50%);
     }
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .prev { left: 0; }
+    .next { right: 0; }
 
     .prev:hover, .next:hover {
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.4);
     }
 
-    /* ============ FOOTER ============ */
+    /* Fade animation */
+    .fade {
+      animation: fadeEffect 1.5s;
+    }
+
+    @keyframes fadeEffect {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    /* ---------- MACHINES SECTION ---------- */
+    #machines {
+      padding: 50px;
+      text-align: center;
+    }
+
+    /* FOOTER */
     footer {
-      background: #023e8a;
+      margin-top: 50px;
+      padding: 30px;
+      background: #00a6b8;
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <h1>AquaVend Kenya</h1>
-    <p>Smart & Automated Water Vending Machines for Entrepreneurs and Communities.</p>
-    <button class="cta-button" onclick="location.href='https://wa.me/254795805814'">
-      💬 WhatsApp Us
-    </button>
-  </header>
+<!-- HEADER -->
+<header id="header">
+  <img src="logo.png" class="logo" alt="Logo">
 
-  <!-- SERVICES -->
-  <section class="services">
-    <h2>What We Offer</h2>
+  <nav>
+    <a onclick="scrollToSection('about')">About Us</a>
+    <a onclick="scrollToSection('machines')">Our Machines</a>
+    <a href="https://wa.me/254795805814" target="_blank" class="whatsapp">WhatsApp</a>
+    <a onclick="scrollToSection('contact')">Contact</a>
+  </nav>
 
-    <div class="service-cards">
-      <div class="card">
-        <h3>Machine Sales</h3>
-        <p>High-quality automated water vending machines for water kiosks & small businesses.</p>
-      </div>
+  <div class="toggle-dark" onclick="toggleDark()">Dark Mode</div>
+</header>
 
-      <div class="card">
-        <h3>Installation & Setup</h3>
-        <p>Professional installation and optimal machine setup for your environment.</p>
-      </div>
+<!-- ABOUT SECTION + SLIDESHOW -->
+<section id="about">
+  <h1>Welcome to AquaVend Kenya</h1>
+  <p>Smart vending machines for clean, purified drinking water.</p>
 
-      <div class="card">
-        <h3>Maintenance & Repair</h3>
-        <p>Full servicing, repairs, and system checks to keep your machine running smoothly.</p>
-      </div>
+  <br>
 
-      <div class="card">
-        <h3>Training & Support</h3>
-        <p>Full operational training and continued support for your business success.</p>
-      </div>
+  <div class="slideshow-container">
+    <div class="slide fade">
+      <img src="machine1.jpg">
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section class="about">
-    <h2>Why AquaVend?</h2>
-    <p>
-      AquaVend Kenya provides durable, precise, and user-friendly vending machines.
-      We help entrepreneurs earn more by offering clean and affordable water while keeping maintenance simple.
-    </p>
-  </section>
-
-  <!-- OUR MACHINES (Your Slideshow) -->
-  <section>
-    <h2 style="text-align:center; color:#0077b6; margin-top:2rem;">Our Machines</h2>
-    <p style="text-align:center;">Automatic slideshow with fade effect & navigation</p>
-
-    <div class="slideshow-container">
-
-      <div class="slide fade">
-        <img src="machine1.jpg" alt="Machine 1">
-      </div>
-
-      <div class="slide fade">
-        <img src="machine2.jpg" alt="Machine 2">
-      </div>
-
-      <div class="slide fade">
-        <img src="machine3.jpg" alt="Machine 3">
-      </div>
-
-      <div class="slide fade">
-        <img src="machine4.jpg" alt="Machine 4">
-      </div>
-
-      <!-- Buttons -->
-      <a class="prev" onclick="plusSlides(-1)">❮</a>
-      <a class="next" onclick="plusSlides(1)">❯</a>
-
+    <div class="slide fade">
+      <img src="machine2.jpg">
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>Contact: +254 795 805 814 | kevinatm24@gmail.com</p>
-    <p>© 2025 AquaVend Kenya. All Rights Reserved.</p>
-  </footer>
+    <div class="slide fade">
+      <img src="machine3.jpg">
+    </div>
 
+    <div class="slide fade">
+      <img src="machine4.jpg">
+    </div>
 
-  <!-- ============ JAVASCRIPT ============ -->
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+  </div>
+</section>
 
-  <script>
-    /* Advanced Slideshow Script */
-    let slideIndex = 1;
-    showSlides(slideIndex);
+<!-- MACHINES SECTION -->
+<section id="machines">
+  <h2>Our Machines</h2>
+  <p>Reliable, modern, smart vending technology.</p>
+</section>
 
-    /* Next/Prev */
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
+<!-- CONTACT FOOTER -->
+<footer id="contact">
+  <h3>Contact Us</h3>
+  <p>Phone: <b>0795805814</b></p>
+  <p>Email: <b>kevinnjiriri23@gmail.com</b></p>
+  <p>Nairobi, Kenya</p>
+</footer>
 
-    /* Auto-slide */
-    setInterval(() => { plusSlides(1); }, 4000);
+<script>
+/* ---------- DARK MODE ---------- */
+function toggleDark() {
+  document.body.classList.toggle("dark");
+  document.getElementById("header").classList.toggle("dark");
+}
 
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("slide");
+/* ---------- SCROLL FUNCTION ---------- */
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
 
-      if (n > slides.length) { slideIndex = 1 }
-      if (n < 1) { slideIndex = slides.length }
+/* ---------- SLIDESHOW SCRIPT ---------- */
+let slideIndex = 1;
+showSlides(slideIndex);
 
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
 
-      slides[slideIndex - 1].style.display = "block";
-    }
-  </script>
+setInterval(() => {
+  plusSlides(1);
+}, 4000);
+
+function showSlides(n) {
+  let slides = document.getElementsByClassName("slide");
+
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
+
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+}
+</script>
 
 </body>
 </html>
